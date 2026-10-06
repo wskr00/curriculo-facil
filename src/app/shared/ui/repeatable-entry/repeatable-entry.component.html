@@ -5,7 +5,9 @@
     <ng-content />
   </div>
 
-  <app-button variant="tertiary" (click)="remove.emit()">
-    {{ removeLabel() }}
-  </app-button>
+  @if (removable()) {
+    <app-button variant="tertiary" (click)="remove.emit()">
+      {{ removeLabel() }}
+    </app-button>
+  }
 </fieldset>

@@ -1,0 +1,45 @@
+.resume-preview {
+  background: var(--resume-preview-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--resume-preview-radius);
+  color: var(--resume-preview-color);
+  min-block-size: 28rem;
+  padding: var(--resume-preview-padding);
+
+  &__header {
+    border-block-end: 1px solid var(--color-border);
+    display: grid;
+    gap: var(--space-xs);
+    padding-block-end: var(--space-md);
+
+    h2 {
+      font: var(--type-resume-name);
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__contact {
+    display: flex;
+    flex-wrap: wrap;
+    font: var(--type-resume-meta);
+    gap: var(--space-xxs) var(--space-sm);
+  }
+
+  &__section {
+    display: grid;
+    gap: var(--space-xxs);
+    margin-block-start: var(--space-md);
+    overflow-wrap: anywhere;
+
+    h3 {
+      font: var(--type-resume-section);
+      letter-spacing: var(--letter-spacing-resume-section);
+      text-transform: uppercase;
+    }
+
+    h4,
+    p {
+      font: var(--type-resume-body);
+    }
+  }
+}

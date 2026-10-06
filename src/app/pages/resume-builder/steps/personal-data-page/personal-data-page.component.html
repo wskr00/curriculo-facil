@@ -1,0 +1,47 @@
+<div class="step-page">
+  <app-resume-step-header [currentStep]="1" />
+
+  <section class="step-page__intro" aria-labelledby="step-title">
+    <h1 id="step-title">Vamos começar pelo básico</h1>
+    <p>Só o que realmente ajuda alguém a entrar em contato com você.</p>
+  </section>
+
+  <form class="step-page__form" novalidate (submit)="onContinue($event)">
+    <div class="step-page__fields">
+      <app-text-field
+        controlId="full-name"
+        label="Nome completo"
+        placeholder="Ex.: Carlos da Silva"
+        autocomplete="name"
+        [formField]="draft.form.personalData.fullName"
+      />
+      <app-text-field
+        controlId="phone"
+        label="Telefone"
+        type="tel"
+        placeholder="Ex.: (91) 99999-9999"
+        autocomplete="tel"
+        [formField]="draft.form.personalData.phone"
+      />
+      <app-text-field
+        controlId="email"
+        label="E-mail"
+        type="email"
+        placeholder="Ex.: nome@email.com"
+        autocomplete="email"
+        [formField]="draft.form.personalData.email"
+      />
+      <app-text-field
+        controlId="location"
+        label="Cidade e estado"
+        placeholder="Ex.: Belém, PA"
+        autocomplete="address-level2"
+        [formField]="draft.form.personalData.location"
+      />
+    </div>
+
+    <p class="step-page__privacy">Privacidade: nada é enviado para um servidor.</p>
+
+    <app-button type="submit">Continuar</app-button>
+  </form>
+</div>

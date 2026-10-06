@@ -1,0 +1,29 @@
+<div class="step-page">
+  <app-resume-step-header [currentStep]="2" backLink="/curriculo/novo/dados-pessoais" />
+
+  <section class="step-page__intro" aria-labelledby="step-title">
+    <h1 id="step-title">Que trabalho você procura?</h1>
+    <p>Informe um cargo ou uma área que combine com você. Não precisa escrever formalmente.</p>
+  </section>
+
+  <form class="step-page__form" novalidate (submit)="onContinue($event)">
+    <div class="step-page__fields">
+      <app-text-field
+        controlId="professional-role"
+        label="Cargo ou área"
+        placeholder="Ex.: Atendente ou auxiliar administrativo"
+        hint="Você poderá mudar isso depois."
+        autocomplete="organization-title"
+        [formField]="draft.form.objective.role"
+      />
+      <app-textarea
+        controlId="professional-objective"
+        label="Objetivo profissional"
+        placeholder="Ex.: Busco uma oportunidade para trabalhar com atendimento ao público."
+        [formField]="draft.form.objective.summary"
+      />
+    </div>
+
+    <app-button type="submit">Continuar</app-button>
+  </form>
+</div>

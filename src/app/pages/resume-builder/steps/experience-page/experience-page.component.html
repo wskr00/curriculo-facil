@@ -1,0 +1,82 @@
+<div class="step-page">
+  <app-resume-step-header [currentStep]="3" backLink="/curriculo/novo/objetivo" />
+
+  <section class="step-page__intro" aria-labelledby="step-title">
+    <h1 id="step-title">Conte onde você já trabalhou</h1>
+    <p>Emprego formal, trabalho autônomo, bico e atividade voluntária também contam.</p>
+  </section>
+
+  <form class="step-page__form" novalidate (submit)="onContinue($event)">
+    <label class="experience-page__no-experience">
+      <input type="checkbox" [formField]="draft.form.experience.noExperience" />
+      Ainda não trabalhei
+    </label>
+
+    @if (!draft.form.experience.noExperience().value()) {
+      <app-repeatable-section
+        sectionId="experience-list"
+        title="Experiência profissional"
+        description="Adicione os trabalhos que ajudam a contar sua trajetória."
+        addLabel="Adicionar outra experiência"
+        (add)="draft.addExperience()"
+      >
+        @for (entry of draft.form.experience.entries; track $index) {
+          <app-repeatable-entry
+            [label]="'Experiência ' + ($index + 1)"
+            [removeLabel]="'Remover experiência ' + ($index + 1)"
+            [removable]="draft.draft().experience.entries.length > 1"
+            (remove)="draft.removeExperience($index)"
+          >
+            <app-text-field
+              [controlId]="'experience-role-' + $index"
+              label="Função"
+              placeholder="Ex.: Atendente"
+              [formField]="entry.role"
+            />
+            <app-text-field
+              [controlId]="'experience-company-' + $index"
+              label="Empresa ou local"
+              placeholder="Ex.: Mercado Boa Compra"
+              [formField]="entry.company"
+            />
+
+            <div class="experience-page__periods">
+              <div class="experience-page__start-period">
+                <app-month-year-field
+                  [controlId]="'experience-start-' + $index"
+                  label="Início"
+                  hint="Selecione o mês e o ano."
+                  [monthField]="entry.startMonth"
+                  [yearField]="entry.startYear"
+                />
+                <label class="experience-page__current-job">
+                  <input type="checkbox" [formField]="entry.current" />
+                  Ainda estou trabalhando aqui
+                </label>
+              </div>
+
+              @if (!entry.current().value()) {
+                <app-month-year-field
+                  [controlId]="'experience-end-' + $index"
+                  label="Fim"
+                  hint="Selecione o mês e o ano."
+                  [monthField]="entry.endMonth"
+                  [yearField]="entry.endYear"
+                />
+              }
+            </div>
+
+            <app-textarea
+              [controlId]="'experience-description-' + $index"
+              label="O que você fazia?"
+              placeholder="Ex.: Atendimento ao público e organização de produtos."
+              [formField]="entry.description"
+            />
+          </app-repeatable-entry>
+        }
+      </app-repeatable-section>
+    }
+
+    <app-button type="submit">Continuar</app-button>
+  </form>
+</div>

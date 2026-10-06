@@ -1,0 +1,56 @@
+<div class="step-page">
+  <app-resume-step-header [currentStep]="4" backLink="/curriculo/novo/experiencias" />
+
+  <section class="step-page__intro" aria-labelledby="step-title">
+    <h1 id="step-title">Sua formação</h1>
+    <p>Se ainda estiver estudando, tudo bem. Basta informar que está cursando.</p>
+  </section>
+
+  <form class="step-page__form" novalidate (submit)="onContinue($event)">
+    <app-repeatable-section
+      sectionId="education-list"
+      title="Formação escolar"
+      addLabel="Adicionar outra formação"
+      (add)="draft.addEducation()"
+    >
+      @for (entry of draft.form.education; track $index) {
+        <app-repeatable-entry
+          [label]="'Formação ' + ($index + 1)"
+          [removeLabel]="'Remover formação ' + ($index + 1)"
+          (remove)="draft.removeEducation($index)"
+        >
+          <app-text-field
+            [controlId]="'education-level-' + $index"
+            label="Escolaridade"
+            placeholder="Ex.: Ensino médio"
+            [formField]="entry.level"
+          />
+          <app-text-field
+            [controlId]="'education-institution-' + $index"
+            label="Instituição"
+            placeholder="Ex.: Escola Nestor Nonato de Lima"
+            [formField]="entry.institution"
+          />
+          <app-text-field
+            [controlId]="'education-status-' + $index"
+            label="Situação"
+            placeholder="Ex.: Cursando"
+            [formField]="entry.status"
+          />
+          <app-text-field
+            [controlId]="'education-year-' + $index"
+            label="Ano ou previsão"
+            placeholder="Ex.: 2026"
+            [formField]="entry.year"
+          />
+        </app-repeatable-entry>
+      } @empty {
+        <p class="education-page__empty">
+          Nenhuma formação adicionada. Você pode continuar sem preencher esta etapa.
+        </p>
+      }
+    </app-repeatable-section>
+
+    <app-button type="submit">Continuar</app-button>
+  </form>
+</div>

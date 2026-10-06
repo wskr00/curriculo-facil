@@ -1,0 +1,21 @@
+@use '../step-layout' as step;
+
+@include step.styles;
+
+.review-page {
+  &__document {
+    margin-block-start: calc(-1 * var(--space-sm));
+  }
+
+  &__edit-link {
+    font: var(--type-label-md);
+    inline-size: fit-content;
+    min-block-size: var(--touch-target-min);
+  }
+
+  &__status {
+    color: var(--color-text-muted);
+    font: var(--type-body-sm);
+    min-block-size: 1.5em;
+  }
+}

@@ -17,6 +17,7 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class RepeatableEntryComponent {
   readonly label = input.required<string>();
+  readonly removable = input(true);
   readonly removeLabel = input.required<string>();
   readonly remove = output<void>();
 

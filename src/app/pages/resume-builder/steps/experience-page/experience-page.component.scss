@@ -1,0 +1,50 @@
+@use '../step-layout' as step;
+
+@include step.styles;
+
+.experience-page {
+  &__no-experience,
+  &__current-job {
+    align-items: flex-start;
+    color: var(--color-on-surface);
+    display: flex;
+    font: var(--type-body-md);
+    gap: var(--space-sm);
+    line-height: 1.4;
+    min-block-size: var(--touch-target-min);
+  }
+
+  &__no-experience {
+    align-items: center;
+  }
+
+  &__no-experience input,
+  &__current-job input {
+    flex: 0 0 auto;
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
+    margin-block-start: 0.2rem;
+  }
+
+  &__periods {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  &__start-period {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  &__current-job {
+    align-items: center;
+    padding-inline-start: var(--space-xxs);
+  }
+}
+
+@media (min-width: 40rem) {
+  .experience-page__periods {
+    align-items: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,24 @@
+.resume-step-header {
+  display: grid;
+  gap: var(--space-md);
+
+  &__brand {
+    color: var(--color-on-surface);
+    font: var(--type-label-lg);
+  }
+
+  &__back {
+    align-items: center;
+    display: inline-flex;
+    font: var(--type-label-md);
+    gap: var(--space-xs);
+    inline-size: fit-content;
+    min-block-size: var(--touch-target-min);
+    text-decoration: none;
+
+    span {
+      font-size: 1.25em;
+      line-height: 1;
+    }
+  }
+}

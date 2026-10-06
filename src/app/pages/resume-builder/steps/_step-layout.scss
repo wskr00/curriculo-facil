@@ -1,0 +1,32 @@
+@mixin styles {
+  .step-page {
+    display: grid;
+    gap: var(--space-xl);
+
+    &__intro {
+      display: grid;
+      gap: var(--space-xs);
+      margin-block-start: var(--space-xl);
+
+      p {
+        max-inline-size: 48ch;
+      }
+    }
+
+    &__form {
+      display: grid;
+      gap: var(--space-xl);
+    }
+
+    &__fields {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    &__privacy {
+      color: var(--color-text-muted);
+      font: var(--type-caption);
+      margin-block-start: calc(-1 * var(--space-md));
+    }
+  }
+}

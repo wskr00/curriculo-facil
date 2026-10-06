@@ -1,0 +1,31 @@
+<div class="resume-flow">
+  <main class="resume-flow__form">
+    <router-outlet />
+  </main>
+
+  <aside class="resume-flow__desktop-preview" aria-label="Prévia do currículo">
+    <app-resume-preview [resume]="draft.draft()" />
+  </aside>
+
+  <button
+    class="resume-flow__mobile-preview-trigger"
+    type="button"
+    aria-haspopup="dialog"
+    (click)="previewDialog.showModal()"
+  >
+    <span class="resume-flow__preview-handle" aria-hidden="true"></span>
+    <span>Prévia do currículo</span>
+    <span class="resume-flow__preview-action">Toque para visualizar</span>
+  </button>
+
+  <dialog #previewDialog class="resume-flow__preview-dialog" aria-labelledby="mobile-preview-title">
+    <header class="resume-flow__preview-dialog-header">
+      <span class="resume-flow__preview-handle" aria-hidden="true"></span>
+      <h2 id="mobile-preview-title">Prévia do currículo</h2>
+      <form method="dialog">
+        <app-button type="submit" variant="tertiary">Fechar prévia</app-button>
+      </form>
+    </header>
+    <app-resume-preview class="resume-flow__preview-dialog-content" [resume]="draft.draft()" />
+  </dialog>
+</div>

@@ -1,0 +1,51 @@
+<div class="step-page">
+  <app-resume-step-header [currentStep]="5" backLink="/curriculo/novo/formacao" />
+
+  <section class="step-page__intro" aria-labelledby="step-title">
+    <h1 id="step-title">O que você sabe fazer?</h1>
+    <p>Adicione cursos se tiver e escolha habilidades que realmente combinam com você.</p>
+  </section>
+
+  <form class="step-page__form" novalidate (submit)="onContinue($event)">
+    <div class="step-page__fields">
+      <app-repeatable-section
+        sectionId="course-list"
+        title="Cursos (opcional)"
+        addLabel="Adicionar outro curso"
+        (add)="draft.addCourse()"
+      >
+        @for (course of draft.form.courses; track $index) {
+          <app-repeatable-entry
+            [label]="'Curso ' + ($index + 1)"
+            [removeLabel]="'Remover curso ' + ($index + 1)"
+            (remove)="draft.removeCourse($index)"
+          >
+            <app-text-field
+              [controlId]="'course-name-' + $index"
+              label="Curso"
+              placeholder="Ex.: Informática básica"
+              [formField]="course.name"
+            />
+          </app-repeatable-entry>
+        }
+      </app-repeatable-section>
+
+      <app-skill-chip-group
+        controlId="skills"
+        label="Habilidades"
+        hint="Selecione todas as que combinam com você."
+        [options]="skillOptions"
+        [formField]="draft.form.skills"
+      />
+
+      <app-text-field
+        controlId="other-skill"
+        label="Outra habilidade"
+        placeholder="Ex.: Informática básica"
+        [formField]="draft.form.otherSkill"
+      />
+    </div>
+
+    <app-button type="submit">Revisar currículo</app-button>
+  </form>
+</div>
