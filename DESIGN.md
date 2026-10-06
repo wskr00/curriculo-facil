@@ -661,6 +661,17 @@ Campos relacionados devem ter espaçamento suficiente para não parecerem um ún
 
 Não utilizar floating labels.
 
+### Mês e ano
+
+Quando o currículo precisar apenas de mês e ano, não solicitar o dia.
+
+Agrupar dois campos de seleção nativos em um `fieldset` com legenda descritiva. Manter labels
+visíveis para `Mês` e `Ano`, usar o nome completo dos meses e ordenar os anos do mais recente para o
+mais antigo.
+
+Em experiências profissionais, incluir a opção `Ainda estou trabalhando aqui`. Quando marcada,
+ocultar o mês e ano de fim e manter o período de início.
+
 ### Text Areas
 
 Text areas seguem o mesmo padrão dos inputs.

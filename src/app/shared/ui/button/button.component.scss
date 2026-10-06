@@ -1,0 +1,83 @@
+:host {
+  display: inline-flex;
+  max-inline-size: 100%;
+}
+
+:host(.button-host--primary) {
+  display: flex;
+}
+
+.button {
+  align-items: center;
+  appearance: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  max-inline-size: 100%;
+  min-block-size: var(--button-tertiary-height);
+  padding-block: var(--space-sm);
+  text-align: center;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.button--primary {
+  background: var(--button-primary-background);
+  border-color: var(--button-primary-background);
+  border-radius: var(--button-primary-radius);
+  color: var(--button-primary-color);
+  font: var(--button-primary-font);
+  inline-size: 100%;
+  min-block-size: var(--button-primary-height);
+  padding-inline: var(--button-primary-padding);
+}
+
+.button--secondary {
+  background: var(--button-secondary-background);
+  border-color: var(--color-border-strong);
+  border-radius: var(--button-secondary-radius);
+  color: var(--button-secondary-color);
+  font: var(--button-secondary-font);
+  min-block-size: var(--button-secondary-height);
+  padding-inline: var(--button-secondary-padding);
+}
+
+.button--tertiary {
+  background: var(--button-tertiary-background);
+  border-radius: var(--button-tertiary-radius);
+  color: var(--button-tertiary-color);
+  font: var(--button-tertiary-font);
+  padding-inline: var(--button-tertiary-padding);
+}
+
+.button:disabled {
+  background: var(--color-canvas);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .button--primary:not(:disabled):hover {
+    background: var(--button-primary-hover-background);
+    border-color: var(--button-primary-hover-background);
+  }
+
+  .button--secondary:not(:disabled):hover,
+  .button--tertiary:not(:disabled):hover {
+    background: var(--color-primary-soft);
+  }
+}
+
+@media (min-width: 64rem) {
+  :host(.button-host--primary) {
+    display: inline-flex;
+  }
+
+  .button--primary {
+    inline-size: auto;
+  }
+}

@@ -1,0 +1,126 @@
+@use './tokens' as design;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-block-size: 100%;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-text-body);
+  font: var(--type-body-md);
+}
+
+app-root {
+  display: block;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+}
+
+:where(h1, h2, h3, p, figure) {
+  margin-block: 0;
+}
+
+h1 {
+  color: var(--color-on-surface);
+  font: var(--type-headline-lg);
+  letter-spacing: var(--letter-spacing-headline-lg);
+}
+
+h2 {
+  color: var(--color-on-surface);
+  font: var(--type-headline-md);
+  letter-spacing: var(--letter-spacing-headline-md);
+}
+
+h3 {
+  color: var(--color-on-surface);
+  font: var(--type-headline-sm);
+}
+
+label {
+  color: var(--color-on-surface);
+  font: var(--type-label-lg);
+}
+
+small {
+  font: var(--type-caption);
+}
+
+a {
+  color: var(--color-primary);
+  text-underline-offset: 0.15em;
+}
+
+:where(button, input, select, textarea) {
+  color: inherit;
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:is([type='checkbox'], [type='radio']) {
+  accent-color: var(--color-primary);
+}
+
+::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+:where(img, picture, svg, video, canvas) {
+  display: block;
+  max-inline-size: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-primary-soft);
+  color: var(--color-on-surface);
+}
+
+.visually-hidden:not(:focus, :active) {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (min-width: design.$desktop-breakpoint) {
+  :root {
+    --layout-page-gutter: var(--layout-desktop-gutter);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,160 @@
+// Breakpoints ficam como variáveis Sass porque media queries são avaliadas no build.
+$desktop-breakpoint: 64rem;
+
+:root {
+  color-scheme: light;
+
+  // Colors
+  --color-primary: #175cd3;
+  --color-primary-hover: #1849a9;
+  --color-primary-soft: #eef4ff;
+  --color-focus: #84adff;
+
+  --color-canvas: #f7f6f2;
+  --color-surface: #fff;
+
+  --color-on-surface: #1c1917;
+  --color-text-body: #44403c;
+  --color-text-muted: #68645e;
+  --color-text-subtle: #8b867e;
+
+  --color-border: #d9d6cf;
+  --color-border-strong: #beb9af;
+
+  --color-error: #b42318;
+  --color-error-soft: #fef3f2;
+  --color-success: #067647;
+  --color-success-soft: #ecfdf3;
+
+  --color-on-primary: #fff;
+  --color-scrim: rgb(28 25 23 / 28%);
+
+  // Typography. Inter should be bundled locally so it remains available offline.
+  --font-family-sans: 'Inter', Arial, sans-serif;
+
+  --type-headline-lg: 600 2rem / 1.2 var(--font-family-sans);
+  --type-headline-md: 600 1.75rem / 1.2 var(--font-family-sans);
+  --type-headline-sm: 600 1.375rem / 1.25 var(--font-family-sans);
+
+  --type-body-lg: 400 1.125rem / 1.5 var(--font-family-sans);
+  --type-body-md: 400 1.0625rem / 1.45 var(--font-family-sans);
+  --type-body-sm: 400 0.9375rem / 1.45 var(--font-family-sans);
+
+  --type-label-lg: 600 1.0625rem / 1.25 var(--font-family-sans);
+  --type-label-md: 600 1rem / 1.25 var(--font-family-sans);
+  --type-label-sm: 500 0.875rem / 1.35 var(--font-family-sans);
+  --type-caption: 400 0.8125rem / 1.4 var(--font-family-sans);
+
+  --type-resume-name: 700 1.5rem / 1.2 var(--font-family-sans);
+  --type-resume-section: 700 0.75rem / 1.25 var(--font-family-sans);
+  --type-resume-body: 400 0.8125rem / 1.45 var(--font-family-sans);
+  --type-resume-meta: 400 0.75rem / 1.4 var(--font-family-sans);
+
+  --letter-spacing-headline-lg: -0.02em;
+  --letter-spacing-headline-md: -0.015em;
+  --letter-spacing-resume-section: 0.02em;
+
+  // Shape and spacing
+  --radius-none: 0;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1.25rem;
+  --radius-sheet: 1.5rem;
+  --radius-full: 9999px;
+
+  --space-xxs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  // Layout and touch targets
+  --layout-mobile-gutter: 1.5rem;
+  --layout-desktop-gutter: 4rem;
+  --layout-page-gutter: var(--layout-mobile-gutter);
+  --layout-form-max-width: 40rem;
+  --layout-desktop-max-width: 80rem;
+
+  --touch-target-min: 3rem;
+  --control-height: 3.5rem;
+  --textarea-min-height: 7rem;
+
+  // Buttons
+  --button-primary-background: var(--color-primary);
+  --button-primary-hover-background: var(--color-primary-hover);
+  --button-primary-color: var(--color-on-primary);
+  --button-primary-font: var(--type-label-lg);
+  --button-primary-radius: var(--radius-md);
+  --button-primary-padding: var(--space-md);
+  --button-primary-height: var(--control-height);
+
+  --button-secondary-background: var(--color-surface);
+  --button-secondary-color: var(--color-primary);
+  --button-secondary-font: var(--type-label-lg);
+  --button-secondary-radius: var(--radius-md);
+  --button-secondary-padding: var(--space-md);
+  --button-secondary-height: var(--control-height);
+
+  --button-tertiary-background: transparent;
+  --button-tertiary-color: var(--color-primary);
+  --button-tertiary-font: var(--type-label-md);
+  --button-tertiary-radius: var(--radius-sm);
+  --button-tertiary-padding: var(--space-sm);
+  --button-tertiary-height: var(--touch-target-min);
+
+  // Form controls and choices
+  --field-background: var(--color-surface);
+  --field-color: var(--color-on-surface);
+  --field-font: var(--type-body-md);
+  --field-radius: var(--radius-md);
+  --field-padding: var(--space-md);
+  --field-height: var(--control-height);
+  --field-border: var(--color-border-strong);
+
+  --choice-background: var(--color-surface);
+  --choice-selected-background: var(--color-primary-soft);
+  --choice-color: var(--color-on-surface);
+  --choice-font: var(--type-body-md);
+  --choice-radius: var(--radius-md);
+  --choice-padding: var(--space-md);
+  --choice-height: var(--control-height);
+
+  --skill-chip-background: var(--color-surface);
+  --skill-chip-selected-background: var(--color-primary-soft);
+  --skill-chip-color: var(--color-text-body);
+  --skill-chip-selected-color: var(--color-primary);
+  --skill-chip-font: var(--type-body-sm);
+  --skill-chip-radius: var(--radius-md);
+  --skill-chip-padding: var(--space-sm);
+  --skill-chip-height: var(--touch-target-min);
+
+  // Resume preview and progress
+  --preview-tray-background: var(--color-surface);
+  --preview-tray-color: var(--color-on-surface);
+  --preview-tray-font: var(--type-label-md);
+  --preview-tray-radius: var(--radius-xl);
+  --preview-tray-padding: var(--space-lg);
+  --preview-tray-height: 4.5rem;
+
+  --preview-sheet-background: var(--color-surface);
+  --preview-sheet-color: var(--color-on-surface);
+  --preview-sheet-font: var(--type-body-md);
+  --preview-sheet-radius: var(--radius-sheet);
+  --preview-sheet-padding: var(--space-lg);
+
+  --progress-background: var(--color-primary);
+  --progress-track-background: var(--color-primary-soft);
+  --progress-radius: var(--radius-full);
+  --progress-height: 0.25rem;
+
+  --resume-page-width: 210mm;
+  --resume-page-min-height: 297mm;
+  --resume-preview-background: var(--color-surface);
+  --resume-preview-color: var(--color-on-surface);
+  --resume-preview-radius: var(--radius-sm);
+  --resume-preview-padding: var(--space-lg);
+}

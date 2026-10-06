@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.month-year-field {
+  border: 0;
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+  min-inline-size: 0;
+  padding: 0;
+
+  &__legend {
+    color: var(--color-on-surface);
+    font: var(--type-label-lg);
+    margin-block-end: var(--space-xs);
+    padding: 0;
+  }
+
+  &__fields {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-inline-size: 0;
+  }
+
+  &__hint {
+    color: var(--color-text-muted);
+    font: var(--type-body-sm);
+    margin: 0;
+  }
+}

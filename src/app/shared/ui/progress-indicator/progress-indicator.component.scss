@@ -1,0 +1,28 @@
+.progress-indicator {
+  display: grid;
+  gap: var(--space-xs);
+  inline-size: 100%;
+}
+
+.progress-indicator__label {
+  font: var(--type-label-sm);
+}
+
+.progress-indicator__track {
+  background: var(--progress-track-background);
+  border-radius: var(--progress-radius);
+  display: block;
+  block-size: var(--progress-height);
+  inline-size: 100%;
+  overflow: hidden;
+}
+
+.progress-indicator__fill {
+  background: var(--progress-background);
+  block-size: 100%;
+  display: block;
+  inline-size: 100%;
+  transform: scaleX(var(--progress-scale, 0));
+  transform-origin: left center;
+  transition: transform 240ms ease-out;
+}

@@ -1,0 +1,27 @@
+<fieldset
+  class="month-year-field"
+  [attr.aria-describedby]="hint() ? hintId() : null"
+>
+  <legend class="month-year-field__legend">{{ label() }}</legend>
+
+  <div class="month-year-field__fields">
+    <app-select-field
+      [controlId]="controlId() + '-month'"
+      label="Mês"
+      placeholder="Mês"
+      [options]="monthOptions"
+      [formField]="monthField()"
+    />
+    <app-select-field
+      [controlId]="controlId() + '-year'"
+      label="Ano"
+      placeholder="Ano"
+      [options]="yearOptions"
+      [formField]="yearField()"
+    />
+  </div>
+
+  @if (hint()) {
+    <p class="month-year-field__hint" [id]="hintId()">{{ hint() }}</p>
+  }
+</fieldset>

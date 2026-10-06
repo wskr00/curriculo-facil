@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.repeatable-section {
+  display: grid;
+  gap: var(--space-lg);
+
+  &__header {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  &__header p {
+    color: var(--color-text-muted);
+    font: var(--type-body-md);
+    margin: 0;
+  }
+
+  &__entries {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  app-button {
+    justify-self: start;
+  }
+}

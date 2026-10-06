@@ -1,0 +1,11 @@
+<fieldset class="repeatable-entry">
+  <legend class="repeatable-entry__legend">{{ label() }}</legend>
+
+  <div class="repeatable-entry__fields">
+    <ng-content />
+  </div>
+
+  <app-button variant="tertiary" (click)="remove.emit()">
+    {{ removeLabel() }}
+  </app-button>
+</fieldset>

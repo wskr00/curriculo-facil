@@ -1,0 +1,44 @@
+@if (!hidden()) {
+  <div class="textarea-field">
+    <div class="textarea-field__label-row">
+      <label [for]="controlId()">{{ label() }}</label>
+      @if (!required()) {
+        <span class="textarea-field__optional">opcional</span>
+      }
+    </div>
+
+    <textarea
+      #control
+      class="textarea-field__control"
+      [id]="controlId()"
+      [name]="name()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [disabled]="disabled()"
+      [readonly]="readonly()"
+      [attr.minlength]="minLength() ?? null"
+      [attr.maxlength]="maxLength() ?? null"
+      [attr.aria-invalid]="errorMessage() ? 'true' : null"
+      [attr.aria-describedby]="describedBy()"
+      rows="4"
+      (input)="value.set(control.value)"
+      (blur)="touch.emit()"
+    ></textarea>
+
+    @if (hint()) {
+      <span class="textarea-field__hint" [id]="hintId()">{{ hint() }}</span>
+    }
+
+    @if (errorMessage(); as message) {
+      <span
+        class="textarea-field__error"
+        [id]="errorId()"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {{ message }}
+      </span>
+    }
+  </div>
+}

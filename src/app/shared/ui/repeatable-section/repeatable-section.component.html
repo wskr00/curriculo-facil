@@ -1,0 +1,24 @@
+<section
+  class="repeatable-section"
+  [attr.aria-labelledby]="titleId()"
+  [attr.aria-describedby]="description() ? descriptionId() : null"
+>
+  <header class="repeatable-section__header">
+    <h2 [id]="titleId()">{{ title() }}</h2>
+    @if (description()) {
+      <p [id]="descriptionId()">{{ description() }}</p>
+    }
+  </header>
+
+  <div class="repeatable-section__entries">
+    <ng-content />
+  </div>
+
+  <app-button
+    variant="tertiary"
+    (click)="add.emit()"
+  >
+    <span aria-hidden="true">+</span>
+    {{ addLabel() }}
+  </app-button>
+</section>

@@ -1,0 +1,11 @@
+<button
+  #control
+  class="button"
+  [class.button--primary]="variant() === 'primary'"
+  [class.button--secondary]="variant() === 'secondary'"
+  [class.button--tertiary]="variant() === 'tertiary'"
+  [type]="type()"
+  [disabled]="disabled()"
+>
+  <ng-content />
+</button>

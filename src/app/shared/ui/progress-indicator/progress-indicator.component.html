@@ -1,0 +1,16 @@
+<label class="progress-indicator">
+  <span class="progress-indicator__label">
+    Etapa {{ currentStep() }} de {{ totalSteps() }}
+  </span>
+  <span class="progress-indicator__track" aria-hidden="true">
+    <span
+      class="progress-indicator__fill"
+      [style.--progress-scale]="progressRatio()"
+    ></span>
+  </span>
+  <progress
+    class="visually-hidden"
+    [value]="currentStep()"
+    [max]="totalSteps()"
+  ></progress>
+</label>
