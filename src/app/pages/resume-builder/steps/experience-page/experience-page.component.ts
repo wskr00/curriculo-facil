@@ -32,7 +32,7 @@ export class ExperiencePageComponent {
     event.preventDefault();
 
     void submit(this.draft.form.experience, async () => {
-      await this.router.navigateByUrl('/curriculo/novo/formacao');
+      await this.router.navigateByUrl('/curriculo/formacao');
     });
   }
 }

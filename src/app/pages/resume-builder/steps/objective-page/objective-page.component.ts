@@ -21,7 +21,7 @@ export class ObjectivePageComponent {
     event.preventDefault();
 
     void submit(this.draft.form.objective, async () => {
-      await this.router.navigateByUrl('/curriculo/novo/experiencias');
+      await this.router.navigateByUrl('/curriculo/experiencias');
     });
   }
 }

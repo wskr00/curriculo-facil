@@ -1,18 +1,17 @@
-<div class="resume-flow">
+<div class="resume-flow" [class.resume-flow--single-column]="!showPreview()">
   <main class="resume-flow__form">
-    <app-resume-step-header
-      [currentStep]="currentStep()"
-      [backLink]="backLink()"
-    />
+    <app-resume-step-header [currentStep]="currentStep()" [backLink]="backLink()" />
 
     <div class="resume-flow__step-content">
       <router-outlet (activate)="updateStepNavigation()" />
     </div>
   </main>
 
-  <aside class="resume-flow__desktop-preview" aria-label="Prévia do currículo">
-    <app-resume-preview [resume]="draft.draft()" />
-  </aside>
+  @if (showPreview()) {
+    <aside class="resume-flow__desktop-preview" aria-label="Prévia do currículo">
+      <app-resume-preview [resume]="draft.draft()" />
+    </aside>
 
-  <app-resume-preview-sheet [resume]="draft.draft()" />
+    <app-resume-preview-sheet [resume]="draft.draft()" />
+  }
 </div>

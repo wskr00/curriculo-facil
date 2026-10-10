@@ -1,13 +1,50 @@
+:host {
+  display: block;
+  min-inline-size: 0;
+}
+
 .resume-preview {
-  align-content: start;
-  aspect-ratio: 210 / 297;
-  background: var(--resume-preview-background);
-  border: 1px solid var(--color-border);
-  border-radius: var(--resume-preview-radius);
-  color: var(--resume-preview-color);
-  display: grid;
-  gap: var(--space-md);
-  padding: var(--resume-preview-padding);
+  min-inline-size: 0;
+
+  &__viewport {
+    inline-size: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__canvas {
+    background: var(--color-canvas);
+    inset-block-start: 0;
+    inset-inline-start: 50%;
+    position: absolute;
+    transform: scale(var(--resume-preview-scale, 1)) translateX(-50%);
+    transform-origin: top left;
+  }
+
+  &__sheet {
+    background: var(--resume-preview-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--resume-preview-radius);
+    box-sizing: border-box;
+    box-shadow: 0 1px 4px rgb(28 25 23 / 8%);
+    inset-inline-start: 0;
+    position: absolute;
+  }
+
+  &__document {
+    align-content: start;
+    box-sizing: border-box;
+    color: var(--resume-preview-color);
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--resume-preview-padding);
+    position: absolute;
+    z-index: 1;
+  }
+
+  &__page-gap-before {
+    padding-block-start: var(--resume-preview-page-gap, 0px);
+  }
 
   &__header {
     display: grid;
@@ -27,20 +64,23 @@
   }
 
   &__contact {
-    display: flex;
-    flex-wrap: wrap;
     font: var(--type-resume-meta);
-    gap: var(--space-xxs) var(--space-xs);
-    justify-content: center;
     list-style: none;
     margin-block: 0;
     padding: 0;
+    text-align: center;
 
-    li + li::before {
-      color: var(--color-text-muted);
-      content: '|';
-      margin-inline-end: var(--space-xs);
+    li {
+      display: inline;
     }
+  }
+
+  &__contact-value {
+    overflow-wrap: anywhere;
+  }
+
+  &__contact-separator {
+    color: var(--color-text-muted);
   }
 
   &__section {
@@ -108,4 +148,8 @@
     margin-block: 0;
     padding-inline-start: 1.25rem;
   }
+}
+
+.resume-preview__canvas--pdf-export .resume-preview__page-gap-before {
+  padding-block-start: 0 !important;
 }

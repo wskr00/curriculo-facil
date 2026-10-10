@@ -36,6 +36,6 @@ export class CoursesAndSkillsPageComponent {
 
   protected async onContinue(event: SubmitEvent): Promise<void> {
     event.preventDefault();
-    await this.router.navigateByUrl('/curriculo/novo/revisao');
+    await this.router.navigateByUrl('/curriculo/revisao');
   }
 }

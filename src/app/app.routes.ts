@@ -4,10 +4,10 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'curriculo/novo/dados-pessoais',
+    redirectTo: 'curriculo/dados-pessoais',
   },
   {
-    path: 'curriculo/novo',
+    path: 'curriculo',
     loadComponent: () =>
       import('./pages/resume-builder/resume-builder-layout/resume-builder-layout.component').then(
         (page) => page.ResumeBuilderLayoutComponent,
@@ -30,7 +30,7 @@ export const routes: Routes = [
       {
         path: 'objetivo',
         title: 'Objetivo profissional | Currículo Fácil',
-        data: { step: 2, backLink: '/curriculo/novo/dados-pessoais' },
+        data: { step: 2, backLink: '/curriculo/dados-pessoais' },
         loadComponent: () =>
           import('./pages/resume-builder/steps/objective-page/objective-page.component').then(
             (page) => page.ObjectivePageComponent,
@@ -39,7 +39,7 @@ export const routes: Routes = [
       {
         path: 'experiencias',
         title: 'Experiências | Currículo Fácil',
-        data: { step: 3, backLink: '/curriculo/novo/objetivo' },
+        data: { step: 3, backLink: '/curriculo/objetivo' },
         loadComponent: () =>
           import('./pages/resume-builder/steps/experience-page/experience-page.component').then(
             (page) => page.ExperiencePageComponent,
@@ -48,7 +48,7 @@ export const routes: Routes = [
       {
         path: 'formacao',
         title: 'Formação | Currículo Fácil',
-        data: { step: 4, backLink: '/curriculo/novo/experiencias' },
+        data: { step: 4, backLink: '/curriculo/experiencias' },
         loadComponent: () =>
           import('./pages/resume-builder/steps/education-page/education-page.component').then(
             (page) => page.EducationPageComponent,
@@ -57,7 +57,7 @@ export const routes: Routes = [
       {
         path: 'cursos-e-habilidades',
         title: 'Cursos e habilidades | Currículo Fácil',
-        data: { step: 5, backLink: '/curriculo/novo/formacao' },
+        data: { step: 5, backLink: '/curriculo/formacao' },
         loadComponent: () =>
           import('./pages/resume-builder/steps/courses-and-skills-page/courses-and-skills-page.component').then(
             (page) => page.CoursesAndSkillsPageComponent,
@@ -66,7 +66,7 @@ export const routes: Routes = [
       {
         path: 'revisao',
         title: 'Revisão do currículo | Currículo Fácil',
-        data: { step: 6, backLink: '/curriculo/novo/cursos-e-habilidades', showPreview: false },
+        data: { step: 6, backLink: '/curriculo/cursos-e-habilidades', showPreview: false },
         loadComponent: () =>
           import('./pages/resume-builder/steps/review-page/review-page.component').then(
             (page) => page.ReviewPageComponent,
@@ -76,6 +76,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'curriculo/novo/dados-pessoais',
+    redirectTo: 'curriculo/dados-pessoais',
   },
 ];

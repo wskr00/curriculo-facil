@@ -20,7 +20,7 @@ export class PersonalDataPageComponent {
     event.preventDefault();
 
     void submit(this.draft.form.personalData, async () => {
-      await this.router.navigateByUrl('/curriculo/novo/objetivo');
+      await this.router.navigateByUrl('/curriculo/objetivo');
     });
   }
 }

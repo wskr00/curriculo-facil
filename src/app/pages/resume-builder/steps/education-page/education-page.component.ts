@@ -40,7 +40,7 @@ export class EducationPageComponent {
     event.preventDefault();
 
     void submit(this.draft.form.education, async () => {
-      await this.router.navigateByUrl('/curriculo/novo/cursos-e-habilidades');
+      await this.router.navigateByUrl('/curriculo/cursos-e-habilidades');
     });
   }
 }

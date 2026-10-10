@@ -1,91 +1,196 @@
-<article class="resume-preview" aria-label="Currículo em prévia">
-  <header class="resume-preview__header">
-    <h1 class="resume-preview__name">
-      {{ resume().personalData.fullName || 'Seu nome completo' }}
-    </h1>
-    @if (resume().objective.role) {
-      <p class="resume-preview__role">{{ resume().objective.role }}</p>
-    }
-    @if (contactDetails().length) {
-      <ul class="resume-preview__contact" aria-label="Contato">
-        @for (detail of contactDetails(); track $index) {
-          <li>{{ detail }}</li>
-        }
-      </ul>
-    }
-  </header>
-
-  @if (resume().objective.summary) {
-    <section class="resume-preview__section">
-      <h2>Objetivo profissional</h2>
-      <p>{{ resume().objective.summary }}</p>
-    </section>
-  }
-
-  @if (!resume().experience.noExperience && experiences().length) {
-    <section class="resume-preview__section">
-      <h2>Experiência</h2>
-      @for (experience of experiences(); track $index) {
-        <article class="resume-preview__entry">
-          <div class="resume-preview__entry-heading">
-            <h3>{{ experience.company || experience.role }}</h3>
-            @if (experiencePeriod(experience); as period) {
-              <p class="resume-preview__date">{{ period }}</p>
-            }
-          </div>
-          @if (experience.company && experience.role) {
-            <p class="resume-preview__entry-subtitle">{{ experience.role }}</p>
-          }
-          @if (experience.description) {
-            <p class="resume-preview__description">{{ experience.description }}</p>
-          }
-        </article>
+<section class="resume-preview" aria-label="Prévia do currículo">
+  <div #viewport class="resume-preview__viewport" [style.block-size.px]="previewHeight()">
+    <div
+      #canvas
+      class="resume-preview__canvas"
+      [style.--resume-preview-scale]="previewScale()"
+      [style.inline-size.px]="pageWidthPx"
+      [style.block-size.px]="canvasHeight()"
+    >
+      @for (sheet of pageSheets(); track sheet.number) {
+        <div
+          class="resume-preview__sheet"
+          [style.inset-block-start.px]="sheet.top"
+          [style.inline-size.px]="pageWidthPx"
+          [style.block-size.px]="pageHeightPx"
+          aria-hidden="true"
+        ></div>
       }
-    </section>
-  }
 
-  @if (courses().length) {
-    <section class="resume-preview__section">
-      <h2>Cursos</h2>
-      <ul class="resume-preview__list">
-        @for (course of courses(); track $index) {
-          <li>{{ course.name }}</li>
-        }
-      </ul>
-    </section>
-  }
+      <article
+        #pdfDocument
+        class="resume-preview__document"
+        [style.inset-block-start.px]="pageMarginPx"
+        [style.inset-inline-start.px]="pageMarginPx"
+        [style.inline-size.px]="contentWidthPx"
+        [style.min-block-size.px]="contentHeightPx"
+        aria-label="Currículo em prévia"
+      >
+        <header class="resume-preview__header" data-resume-page-block="header" divisionDisable>
+          <h1 class="resume-preview__name">
+            {{ resume().personalData.fullName || 'Seu nome completo' }}
+          </h1>
+          @if (resume().objective.role) {
+            <p class="resume-preview__role">{{ resume().objective.role }}</p>
+          }
+          @if (contactDetails().length) {
+            <ul class="resume-preview__contact" aria-label="Contato">
+              @for (detail of contactDetails(); track $index) {
+                <li>
+                  @if ($index > 0) {
+                    <span class="resume-preview__contact-separator" aria-hidden="true"> | </span>
+                  }
+                  <span class="resume-preview__contact-value">{{ detail }}</span>
+                </li>
+              }
+            </ul>
+          }
+        </header>
 
-  @if (skills().length) {
-    <section class="resume-preview__section">
-      <h2>Habilidades</h2>
-      <ul class="resume-preview__list">
-        @for (skill of skills(); track $index) {
-          <li>{{ skill }}</li>
-        }
-      </ul>
-    </section>
-  }
-
-  @if (education().length) {
-    <section class="resume-preview__section">
-      <h2>Formação</h2>
-      @for (entry of education(); track $index) {
-        <article class="resume-preview__entry">
-          <div class="resume-preview__entry-heading">
-            <h3>{{ entry.institution || entry.level }}</h3>
-            @if (entry.year) {
-              <p class="resume-preview__date">{{ entry.year }}</p>
-            }
-          </div>
-          @if (entry.level && entry.institution) {
-            <p class="resume-preview__entry-subtitle">
-              {{ entry.level }}{{ entry.status ? ' · ' + entry.status : '' }}
+        @if (resume().objective.summary) {
+          <section class="resume-preview__section">
+            <h2
+              data-resume-page-block="objective-heading"
+              [class.resume-preview__page-gap-before]="hasPageGapBefore('objective-heading')"
+              [style.--resume-preview-page-gap.px]="pageGapBefore('objective-heading')"
+              divisionDisable
+            >
+              Objetivo profissional
+            </h2>
+            <p
+              data-resume-page-block="objective-summary"
+              [class.resume-preview__page-gap-before]="hasPageGapBefore('objective-summary')"
+              [style.--resume-preview-page-gap.px]="pageGapBefore('objective-summary')"
+              divisionDisable
+            >
+              {{ resume().objective.summary }}
             </p>
-          } @else if (entry.status) {
-            <p class="resume-preview__entry-subtitle">{{ entry.status }}</p>
-          }
-        </article>
-      }
-    </section>
-  }
-</article>
+          </section>
+        }
+
+        @if (!resume().experience.noExperience && experiences().length) {
+          <section class="resume-preview__section">
+            <h2
+              data-resume-page-block="experience-heading"
+              [class.resume-preview__page-gap-before]="hasPageGapBefore('experience-heading')"
+              [style.--resume-preview-page-gap.px]="pageGapBefore('experience-heading')"
+              divisionDisable
+            >
+              Experiência
+            </h2>
+            @for (experience of experiences(); track $index) {
+              <article
+                class="resume-preview__entry"
+                [attr.data-resume-page-block]="'experience-' + $index"
+                [class.resume-preview__page-gap-before]="hasPageGapBefore('experience-' + $index)"
+                [style.--resume-preview-page-gap.px]="pageGapBefore('experience-' + $index)"
+                divisionDisable
+              >
+                <div class="resume-preview__entry-heading">
+                  <h3>{{ experience.company || experience.role }}</h3>
+                  @if (experiencePeriod(experience); as period) {
+                    <p class="resume-preview__date">{{ period }}</p>
+                  }
+                </div>
+                @if (experience.company && experience.role) {
+                  <p class="resume-preview__entry-subtitle">{{ experience.role }}</p>
+                }
+                @if (experience.description) {
+                  <p class="resume-preview__description" divisionDisable>
+                    {{ experience.description }}
+                  </p>
+                }
+              </article>
+            }
+          </section>
+        }
+
+        @if (courses().length) {
+          <section class="resume-preview__section">
+            <h2
+              data-resume-page-block="courses-heading"
+              [class.resume-preview__page-gap-before]="hasPageGapBefore('courses-heading')"
+              [style.--resume-preview-page-gap.px]="pageGapBefore('courses-heading')"
+              divisionDisable
+            >
+              Cursos
+            </h2>
+            <ul class="resume-preview__list">
+              @for (course of courses(); track $index) {
+                <li
+                  [attr.data-resume-page-block]="'course-' + $index"
+                  [class.resume-preview__page-gap-before]="hasPageGapBefore('course-' + $index)"
+                  [style.--resume-preview-page-gap.px]="pageGapBefore('course-' + $index)"
+                  divisionDisable
+                >
+                  {{ course.name }}
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        @if (skills().length) {
+          <section class="resume-preview__section">
+            <h2
+              data-resume-page-block="skills-heading"
+              [class.resume-preview__page-gap-before]="hasPageGapBefore('skills-heading')"
+              [style.--resume-preview-page-gap.px]="pageGapBefore('skills-heading')"
+              divisionDisable
+            >
+              Habilidades
+            </h2>
+            <ul class="resume-preview__list">
+              @for (skill of skills(); track $index) {
+                <li
+                  [attr.data-resume-page-block]="'skill-' + $index"
+                  [class.resume-preview__page-gap-before]="hasPageGapBefore('skill-' + $index)"
+                  [style.--resume-preview-page-gap.px]="pageGapBefore('skill-' + $index)"
+                  divisionDisable
+                >
+                  {{ skill }}
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        @if (education().length) {
+          <section class="resume-preview__section">
+            <h2
+              data-resume-page-block="education-heading"
+              [class.resume-preview__page-gap-before]="hasPageGapBefore('education-heading')"
+              [style.--resume-preview-page-gap.px]="pageGapBefore('education-heading')"
+              divisionDisable
+            >
+              Formação
+            </h2>
+            @for (entry of education(); track $index) {
+              <article
+                class="resume-preview__entry"
+                [attr.data-resume-page-block]="'education-' + $index"
+                [class.resume-preview__page-gap-before]="hasPageGapBefore('education-' + $index)"
+                [style.--resume-preview-page-gap.px]="pageGapBefore('education-' + $index)"
+                divisionDisable
+              >
+                <div class="resume-preview__entry-heading">
+                  <h3>{{ entry.institution || entry.level }}</h3>
+                  @if (entry.year) {
+                    <p class="resume-preview__date">{{ entry.year }}</p>
+                  }
+                </div>
+                @if (entry.level && entry.institution) {
+                  <p class="resume-preview__entry-subtitle">
+                    {{ entry.level }}{{ entry.status ? ' · ' + entry.status : '' }}
+                  </p>
+                } @else if (entry.status) {
+                  <p class="resume-preview__entry-subtitle">{{ entry.status }}</p>
+                }
+              </article>
+            }
+          </section>
+        }
+      </article>
+    </div>
+  </div>
+</section>

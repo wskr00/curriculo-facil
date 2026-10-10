@@ -22,13 +22,15 @@ export class ResumeBuilderLayoutComponent {
   protected readonly draft = inject(ResumeDraftService);
   protected readonly currentStep = signal(1);
   protected readonly backLink = signal<string | undefined>(undefined);
+  protected readonly showPreview = signal(true);
 
   private readonly route = inject(ActivatedRoute);
 
   protected updateStepNavigation(): void {
-    const { step, backLink } = this.route.firstChild?.snapshot.data ?? {};
+    const { step, backLink, showPreview } = this.route.firstChild?.snapshot.data ?? {};
 
     this.currentStep.set(typeof step === 'number' ? step : 1);
     this.backLink.set(typeof backLink === 'string' ? backLink : undefined);
+    this.showPreview.set(showPreview !== false);
   }
 }

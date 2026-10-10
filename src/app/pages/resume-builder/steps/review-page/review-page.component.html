@@ -4,13 +4,11 @@
     <p>Leia com calma. Se algo estiver errado, volte e corrija.</p>
   </section>
 
-  <div #pdfContent class="review-page__document">
+  <div class="review-page__document">
     <app-resume-preview [resume]="draft.draft()" />
   </div>
 
-  <a class="review-page__edit-link" routerLink="/curriculo/novo/dados-pessoais">
-    Editar informações
-  </a>
+  <a class="review-page__edit-link" routerLink="/curriculo/dados-pessoais">Editar informações</a>
 
   <app-button type="button" [disabled]="isDownloading()" (click)="downloadPdf()">
     {{ isDownloading() ? 'Preparando PDF…' : 'Baixar currículo em PDF' }}

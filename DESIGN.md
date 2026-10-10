@@ -787,6 +787,11 @@ Evitar:
 
 A aparência deve continuar boa em preto e branco.
 
+Quando o conteúdo ocupar mais de uma página, mostrar as folhas A4 empilhadas
+verticalmente, com separação discreta e indicação do total de páginas. No
+celular, a pessoa percorre as folhas pela rolagem da própria prévia. Manter a
+tipografia legível; não reduzir o currículo inteiro para caber em uma página.
+
 ### Resume Document
 
 O documento final utiliza formato visual A4.
