@@ -3,7 +3,8 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "b0ec37b8-9220-476a-b2b0-151cdfc8b742"
+    "analytics": "b0ec37b8-9220-476a-b2b0-151cdfc8b742",
+    "schematicCollections": ["@schematics/angular", "playwright-ng-schematics"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -35,9 +36,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -76,8 +75,19 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test",
-          "options": {"coverage": true}
+          "builder": "@angular/build:unit-test"
+        },
+        "e2e": {
+          "builder": "playwright-ng-schematics:playwright",
+          "options": {
+            "devServerTarget": "curriculo-facil:serve",
+            "port": 0
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "curriculo-facil:serve:production"
+            }
+          }
         }
       }
     }
