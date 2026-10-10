@@ -1,3 +1,30 @@
 @use './styles/fonts';
 @use './styles/tokens';
 @use './styles/base';
+
+::view-transition-old(root) {
+  animation: 160ms ease-out both route-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 160ms ease-in both route-fade-in;
+}
+
+@keyframes route-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

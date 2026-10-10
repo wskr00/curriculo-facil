@@ -1,79 +1,91 @@
 <article class="resume-preview" aria-label="Currículo em prévia">
   <header class="resume-preview__header">
-    <h2>{{ resume().personalData.fullName || 'Seu nome completo' }}</h2>
-    <p class="resume-preview__contact">
-      @if (resume().personalData.location) {
-        <span>{{ resume().personalData.location }}</span>
-      }
-      @if (resume().personalData.phone) {
-        <span>{{ resume().personalData.phone }}</span>
-      }
-      @if (resume().personalData.email) {
-        <span>{{ resume().personalData.email }}</span>
-      }
-    </p>
+    <h1 class="resume-preview__name">
+      {{ resume().personalData.fullName || 'Seu nome completo' }}
+    </h1>
+    @if (resume().objective.role) {
+      <p class="resume-preview__role">{{ resume().objective.role }}</p>
+    }
+    @if (contactDetails().length) {
+      <ul class="resume-preview__contact" aria-label="Contato">
+        @for (detail of contactDetails(); track $index) {
+          <li>{{ detail }}</li>
+        }
+      </ul>
+    }
   </header>
 
-  @if (resume().objective.role || resume().objective.summary) {
+  @if (resume().objective.summary) {
     <section class="resume-preview__section">
-      <h3>Objetivo</h3>
-      @if (resume().objective.role) {
-        <p>{{ resume().objective.role }}</p>
-      }
-      @if (resume().objective.summary) {
-        <p>{{ resume().objective.summary }}</p>
-      }
+      <h2>Objetivo profissional</h2>
+      <p>{{ resume().objective.summary }}</p>
     </section>
   }
 
   @if (!resume().experience.noExperience && experiences().length) {
     <section class="resume-preview__section">
-      <h3>Experiência</h3>
+      <h2>Experiência</h2>
       @for (experience of experiences(); track $index) {
-        @if (experience.role) {
-          <h4>{{ experience.role }}</h4>
-        }
-        @if (experience.company) {
-          <p>{{ experience.company }}</p>
-        }
-        @if (experiencePeriod(experience); as period) {
-          <p>{{ period }}</p>
-        }
-        @if (experience.description) {
-          <p>{{ experience.description }}</p>
-        }
-      }
-    </section>
-  }
-
-  @if (education().length) {
-    <section class="resume-preview__section">
-      <h3>Formação</h3>
-      @for (entry of education(); track $index) {
-        <p>{{ entry.level }}{{ entry.status ? ' — ' + entry.status : '' }}</p>
-        @if (entry.institution) {
-          <p>{{ entry.institution }}</p>
-        }
-        @if (entry.year) {
-          <p>{{ entry.year }}</p>
-        }
+        <article class="resume-preview__entry">
+          <div class="resume-preview__entry-heading">
+            <h3>{{ experience.company || experience.role }}</h3>
+            @if (experiencePeriod(experience); as period) {
+              <p class="resume-preview__date">{{ period }}</p>
+            }
+          </div>
+          @if (experience.company && experience.role) {
+            <p class="resume-preview__entry-subtitle">{{ experience.role }}</p>
+          }
+          @if (experience.description) {
+            <p class="resume-preview__description">{{ experience.description }}</p>
+          }
+        </article>
       }
     </section>
   }
 
   @if (courses().length) {
     <section class="resume-preview__section">
-      <h3>Cursos</h3>
-      @for (course of courses(); track $index) {
-        <p>{{ course.name }}</p>
-      }
+      <h2>Cursos</h2>
+      <ul class="resume-preview__list">
+        @for (course of courses(); track $index) {
+          <li>{{ course.name }}</li>
+        }
+      </ul>
     </section>
   }
 
   @if (skills().length) {
     <section class="resume-preview__section">
-      <h3>Habilidades</h3>
-      <p>{{ skills().join(' · ') }}</p>
+      <h2>Habilidades</h2>
+      <ul class="resume-preview__list">
+        @for (skill of skills(); track $index) {
+          <li>{{ skill }}</li>
+        }
+      </ul>
+    </section>
+  }
+
+  @if (education().length) {
+    <section class="resume-preview__section">
+      <h2>Formação</h2>
+      @for (entry of education(); track $index) {
+        <article class="resume-preview__entry">
+          <div class="resume-preview__entry-heading">
+            <h3>{{ entry.institution || entry.level }}</h3>
+            @if (entry.year) {
+              <p class="resume-preview__date">{{ entry.year }}</p>
+            }
+          </div>
+          @if (entry.level && entry.institution) {
+            <p class="resume-preview__entry-subtitle">
+              {{ entry.level }}{{ entry.status ? ' · ' + entry.status : '' }}
+            </p>
+          } @else if (entry.status) {
+            <p class="resume-preview__entry-subtitle">{{ entry.status }}</p>
+          }
+        </article>
+      }
     </section>
   }
 </article>

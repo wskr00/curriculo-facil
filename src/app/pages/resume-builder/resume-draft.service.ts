@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { applyEach, email, form, required } from '@angular/forms/signals';
+import { applyEach, email, form, required, validate } from '@angular/forms/signals';
 
 export interface PersonalData {
   fullName: string;
@@ -43,37 +43,55 @@ export interface ResumeDraftModel {
   education: EducationEntry[];
   courses: CourseEntry[];
   skills: string[];
-  otherSkill: string;
-}
-
-export function createEmptyExperience(): ExperienceEntry {
-  return {
-    role: '',
-    company: '',
-    startMonth: '',
-    startYear: '',
-    endMonth: '',
-    endYear: '',
-    current: false,
-    description: '',
-  };
-}
-
-export function createEmptyEducation(): EducationEntry {
-  return {
-    level: '',
-    institution: '',
-    status: '',
-    year: '',
-  };
-}
-
-export function createEmptyCourse(): CourseEntry {
-  return { name: '' };
 }
 
 @Injectable()
 export class ResumeDraftService {
+  private static createEmptyExperience(): ExperienceEntry {
+    return {
+      role: '',
+      company: '',
+      startMonth: '',
+      startYear: '',
+      endMonth: '',
+      endYear: '',
+      current: false,
+      description: '',
+    };
+  }
+
+  private static createEmptyEducation(): EducationEntry {
+    return {
+      level: '',
+      institution: '',
+      status: '',
+      year: '',
+    };
+  }
+
+  private static createEmptyCourse(): CourseEntry {
+    return { name: '' };
+  }
+
+  private static monthIndex(month: string, year: string): number | undefined {
+    const monthNumber = Number(month);
+    const yearNumber = Number(year);
+
+    if (
+      !Number.isInteger(monthNumber) ||
+      monthNumber < 1 ||
+      monthNumber > 12 ||
+      !Number.isSafeInteger(yearNumber) ||
+      yearNumber < 1
+    ) {
+      return undefined;
+    }
+
+    const dateIndex = yearNumber * 12 + monthNumber - 1;
+
+    return Number.isSafeInteger(dateIndex) ? dateIndex : undefined;
+  }
+
   private readonly model = signal<ResumeDraftModel>({
     personalData: {
       fullName: '',
@@ -87,12 +105,11 @@ export class ResumeDraftService {
     },
     experience: {
       noExperience: false,
-      entries: [createEmptyExperience()],
+      entries: [ResumeDraftService.createEmptyExperience()],
     },
-    education: [createEmptyEducation()],
-    courses: [createEmptyCourse()],
+    education: [ResumeDraftService.createEmptyEducation()],
+    courses: [ResumeDraftService.createEmptyCourse()],
     skills: [],
-    otherSkill: '',
   });
 
   readonly draft = this.model.asReadonly();
@@ -144,6 +161,26 @@ export class ResumeDraftService {
         message: 'Selecione o ano de término.',
         when: ({ valueOf }) => !valueOf(path.experience.noExperience) && !valueOf(entry.current),
       });
+      validate(entry.endYear, ({ value, valueOf }) => {
+        if (valueOf(path.experience.noExperience) || valueOf(entry.current)) {
+          return undefined;
+        }
+
+        const startDate = ResumeDraftService.monthIndex(
+          valueOf(entry.startMonth),
+          valueOf(entry.startYear),
+        );
+        const endDate = ResumeDraftService.monthIndex(valueOf(entry.endMonth), value());
+
+        if (startDate === undefined || endDate === undefined || endDate >= startDate) {
+          return undefined;
+        }
+
+        return {
+          kind: 'experienceDateOrder',
+          message: 'A data final deve ser igual ou posterior à data inicial.',
+        };
+      });
     });
 
     applyEach(path.education, (entry) => {
@@ -159,7 +196,10 @@ export class ResumeDraftService {
       ...current,
       experience: {
         ...current.experience,
-        entries: [...current.experience.entries, createEmptyExperience()],
+        entries: [
+          ...current.experience.entries,
+          ResumeDraftService.createEmptyExperience(),
+        ],
       },
     }));
   }
@@ -183,7 +223,7 @@ export class ResumeDraftService {
   addEducation(): void {
     this.model.update((current) => ({
       ...current,
-      education: [...current.education, createEmptyEducation()],
+      education: [...current.education, ResumeDraftService.createEmptyEducation()],
     }));
   }
 
@@ -199,7 +239,7 @@ export class ResumeDraftService {
   addCourse(): void {
     this.model.update((current) => ({
       ...current,
-      courses: [...current.courses, createEmptyCourse()],
+      courses: [...current.courses, ResumeDraftService.createEmptyCourse()],
     }));
   }
 

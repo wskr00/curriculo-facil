@@ -7,7 +7,6 @@ import { RepeatableSectionComponent } from '../../../../shared/ui/repeatable-sec
 import { SkillChipGroupComponent } from '../../../../shared/ui/skill-chip-group/skill-chip-group.component';
 import { TextFieldComponent } from '../../../../shared/ui/text-field/text-field.component';
 import { ResumeDraftService } from '../../resume-draft.service';
-import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-header.component';
 
 const SKILL_OPTIONS = [
   { value: 'Comunicação', label: 'Comunicação' },
@@ -23,7 +22,6 @@ const SKILL_OPTIONS = [
     FormField,
     RepeatableEntryComponent,
     RepeatableSectionComponent,
-    ResumeStepHeaderComponent,
     SkillChipGroupComponent,
     TextFieldComponent,
   ],

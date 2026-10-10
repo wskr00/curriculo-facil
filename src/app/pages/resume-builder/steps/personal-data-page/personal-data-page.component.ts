@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { TextFieldComponent } from '../../../../shared/ui/text-field/text-field.component';
 import { ResumeDraftService } from '../../resume-draft.service';
-import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-header.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ButtonComponent, FormField, ResumeStepHeaderComponent, TextFieldComponent],
+  imports: [ButtonComponent, FormField, TextFieldComponent],
   selector: 'app-personal-data-page',
   styleUrl: './personal-data-page.component.scss',
   templateUrl: './personal-data-page.component.html',

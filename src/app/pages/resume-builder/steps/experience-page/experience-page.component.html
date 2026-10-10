@@ -1,6 +1,4 @@
 <div class="step-page">
-  <app-resume-step-header [currentStep]="3" backLink="/curriculo/novo/objetivo" />
-
   <section class="step-page__intro" aria-labelledby="step-title">
     <h1 id="step-title">Conte onde você já trabalhou</h1>
     <p>Emprego formal, trabalho autônomo, bico e atividade voluntária também contam.</p>
@@ -45,7 +43,6 @@
                 <app-month-year-field
                   [controlId]="'experience-start-' + $index"
                   label="Início"
-                  hint="Selecione o mês e o ano."
                   [monthField]="entry.startMonth"
                   [yearField]="entry.startYear"
                 />
@@ -59,7 +56,6 @@
                 <app-month-year-field
                   [controlId]="'experience-end-' + $index"
                   label="Fim"
-                  hint="Selecione o mês e o ano."
                   [monthField]="entry.endMonth"
                   [yearField]="entry.endYear"
                 />

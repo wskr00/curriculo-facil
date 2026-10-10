@@ -46,7 +46,7 @@ $desktop-breakpoint: 64rem;
   --type-caption: 400 0.8125rem / 1.4 var(--font-family-sans);
 
   --type-resume-name: 700 1.5rem / 1.2 var(--font-family-sans);
-  --type-resume-section: 700 0.75rem / 1.25 var(--font-family-sans);
+  --type-resume-section: 700 0.875rem / 1.25 var(--font-family-sans);
   --type-resume-body: 400 0.8125rem / 1.45 var(--font-family-sans);
   --type-resume-meta: 400 0.75rem / 1.4 var(--font-family-sans);
 
@@ -75,6 +75,7 @@ $desktop-breakpoint: 64rem;
   // Layout and touch targets
   --layout-mobile-gutter: 1.5rem;
   --layout-desktop-gutter: 4rem;
+  --layout-resume-builder-desktop-gutter: 2.5rem;
   --layout-page-gutter: var(--layout-mobile-gutter);
   --layout-form-max-width: 40rem;
   --layout-desktop-max-width: 80rem;
@@ -133,18 +134,11 @@ $desktop-breakpoint: 64rem;
   --skill-chip-height: var(--touch-target-min);
 
   // Resume preview and progress
-  --preview-tray-background: var(--color-surface);
-  --preview-tray-color: var(--color-on-surface);
-  --preview-tray-font: var(--type-label-md);
-  --preview-tray-radius: var(--radius-xl);
-  --preview-tray-padding: var(--space-lg);
-  --preview-tray-height: 4.5rem;
-
   --preview-sheet-background: var(--color-surface);
   --preview-sheet-color: var(--color-on-surface);
-  --preview-sheet-font: var(--type-body-md);
   --preview-sheet-radius: var(--radius-sheet);
   --preview-sheet-padding: var(--space-lg);
+  --preview-sheet-peek-height: 7.5rem;
 
   --progress-background: var(--color-primary);
   --progress-track-background: var(--color-primary-soft);

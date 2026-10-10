@@ -100,7 +100,7 @@ typography:
 
   resume-section:
     fontFamily: Inter
-    fontSize: 12px
+    fontSize: 14px
     fontWeight: 700
     lineHeight: 1.25
     letterSpacing: 0.02em
@@ -141,6 +141,7 @@ spacing:
   form-max-width: 640px
   desktop-max-width: 1280px
   desktop-gutter: 64px
+  resume-builder-desktop-gutter: 40px
 
 components:
   button-primary:
@@ -223,20 +224,12 @@ components:
     padding: 12px
     height: 48px
 
-  preview-tray:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.xl}"
-    padding: 24px
-    height: 72px
-
   preview-sheet:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
-    typography: "{typography.body-md}"
     rounded: "{rounded.sheet}"
     padding: 24px
+    peekHeight: 120px
 
   progress:
     backgroundColor: "{colors.primary}"
@@ -482,6 +475,13 @@ O conteúdo deve permanecer centralizado, com largura máxima aproximada de 1280
 
 O formulário deve manter largura confortável, normalmente entre 520px e 640px.
 
+No fluxo de criação, usar duas colunas a partir de 1200px, quando houver espaço
+para manter pelo menos 520px para o formulário e 568px para a prévia, além do
+espaçamento entre eles. Entre 1024px e 1199px, manter o formulário e a prévia em
+uma coluna, sem comprimir a prévia. Nesse layout, a margem lateral pode ser
+reduzida para 40px. A prévia representa uma página A4 em orientação retrato
+(proporção 210:297) e ocupa a coluna mais larga.
+
 A prévia do documento não precisa de múltiplos containers ao redor dela. O próprio documento funciona como superfície visual.
 
 ### Spacing
@@ -515,6 +515,8 @@ seguido por uma única barra horizontal.
 Não utilizar steppers complexos, círculos numerados ou seis elementos visuais concorrentes em telas pequenas.
 
 O texto continua sendo a principal fonte de significado; a barra complementa a informação.
+
+No cabeçalho, o controle “Voltar” mantém uma posição reservada desde a primeira etapa e aparece desabilitado enquanto não houver etapa anterior.
 
 ## Elevation & Depth
 
@@ -745,42 +747,17 @@ Chips não substituem uma forma aberta de entrada quando uma resposta personaliz
 
 Não transformar grandes quantidades de opções em uma nuvem visual difícil de escanear.
 
-### Preview Tray
-
-Em telas mobile, uma prévia pode permanecer acessível através de um tray junto à região inferior.
-
-O estado fechado deve ser simples, por exemplo:
-
-> Prévia do currículo  
-> Arraste para cima ou toque
-
-O tray possui um puxador visual.
-
-O puxador deve possuir área interativa de pelo menos 48px mesmo quando sua representação visual for menor.
-
-O gesto de arrastar é sempre opcional.
-
-Tocar no tray ou no puxador deve oferecer a mesma função principal.
-
 ### Preview Bottom Sheet
 
-Ao expandir a prévia, ela aparece como bottom sheet sobre o conteúdo.
+Em telas mobile, a própria superfície do bottom sheet contém a prévia nos estados recolhido e expandido. Não criar um botão/tray separado para abrir outro painel nem duplicar o puxador.
 
-O estado expandido deve possuir:
+O estado recolhido deve manter visíveis o puxador e o título “Prévia do currículo”. A área interativa do puxador também cobre o título, sem alterar sua posição visual. A superfície é persistente e não modal; o conteúdo do formulário permanece utilizável.
 
-- puxador;
-- título;
-- ação textual clara para fechar;
-- conteúdo da prévia;
-- scrim discreto.
+O mesmo puxador visual e interativo deve mover a superfície. Recolhido, sua área de efeito cobre toda a parte visível do sheet. Expandido, cobre o cabeçalho até o divisor abaixo do título, sem interferir na interação com o conteúdo da prévia. Sua área clicável deve ter pelo menos 48px, mesmo quando a representação visual for menor.
 
-Deve ser possível fechar através de mais de um mecanismo, incluindo uma ação simples de toque.
+O gesto de arrastar é sempre opcional: tocar no puxador alterna entre os estados e também deve ser acessível por teclado. No estado expandido, oferecer uma ação textual clara para recolher a prévia.
 
-A interação não pode depender exclusivamente de drag.
-
-Quando utilizada com teclado ou tecnologia assistiva, o foco deve ser gerenciado de forma previsível.
-
-Ao fechar, o foco retorna ao controle que abriu a superfície.
+O foco permanece previsível: ao fechar pelo botão, devolvê-lo ao puxador; não prender o foco como em um diálogo modal. O conteúdo da prévia fica fora da árvore de acessibilidade enquanto recolhido.
 
 Animações devem ser curtas e funcionais.
 
@@ -816,10 +793,15 @@ O documento final utiliza formato visual A4.
 
 A hierarquia preferencial é simples:
 
-- nome;
-- contato;
-- seções;
-- conteúdo.
+- nome centralizado;
+- cargo ou área pretendida;
+- contatos centralizados, em uma linha quando couber;
+- seções em uma coluna, com títulos em caixa alta e uma linha discreta;
+- conteúdo organizado por entradas, com instituição ou empresa à esquerda e datas à direita quando houver espaço.
+
+Em experiências e formações, o nome da empresa ou instituição recebe destaque. A função, o curso ou o nível de formação aparece logo abaixo, em estilo secundário. As descrições permanecem como texto selecionável e legível.
+
+As experiências aparecem da mais recente para a mais antiga. Trabalhos atuais ficam primeiro; nos períodos sobrepostos, vale o término mais recente, com o início como desempate. Experiências sem datas completas aparecem depois das datadas, preservando entre si a ordem do formulário.
 
 Se uma seção não possuir conteúdo, seu título também não deve aparecer.
 

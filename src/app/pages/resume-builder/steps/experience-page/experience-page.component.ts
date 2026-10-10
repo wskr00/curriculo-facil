@@ -8,7 +8,6 @@ import { RepeatableSectionComponent } from '../../../../shared/ui/repeatable-sec
 import { TextFieldComponent } from '../../../../shared/ui/text-field/text-field.component';
 import { TextareaComponent } from '../../../../shared/ui/textarea/textarea.component';
 import { ResumeDraftService } from '../../resume-draft.service';
-import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-header.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +17,6 @@ import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-
     MonthYearFieldComponent,
     RepeatableEntryComponent,
     RepeatableSectionComponent,
-    ResumeStepHeaderComponent,
     TextareaComponent,
     TextFieldComponent,
   ],

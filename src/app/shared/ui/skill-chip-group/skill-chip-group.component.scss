@@ -9,6 +9,8 @@
 
   &__fieldset {
     border: 0;
+    display: grid;
+    gap: var(--space-md);
     margin: 0;
     min-inline-size: 0;
     padding: 0;
@@ -23,7 +25,6 @@
   &__legend {
     color: var(--color-on-surface);
     font: var(--type-label-lg);
-    margin-block-end: var(--space-sm);
     padding: 0;
   }
 
@@ -41,6 +42,7 @@
 
   &__option {
     align-items: center;
+    appearance: none;
     background: var(--skill-chip-background);
     border: 1px solid var(--color-border-strong);
     border-radius: var(--skill-chip-radius);
@@ -48,9 +50,11 @@
     cursor: pointer;
     display: inline-flex;
     font: var(--skill-chip-font);
+    gap: var(--space-xs);
     min-block-size: var(--skill-chip-height);
     padding: var(--skill-chip-padding);
     position: relative;
+    text-align: start;
     transition:
       background-color 140ms ease,
       border-color 140ms ease,
@@ -71,6 +75,33 @@
     &--invalid {
       border-color: var(--color-error);
     }
+  }
+
+  &__custom {
+    background: var(--skill-chip-selected-background);
+    border-color: var(--color-primary);
+    color: var(--skill-chip-selected-color);
+    font-weight: 500;
+    justify-content: space-between;
+    max-inline-size: 100%;
+
+    > span:first-child {
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__remove-icon {
+    flex: 0 0 auto;
+    font-size: 1.25em;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  &__custom-entry {
+    align-items: end;
+    display: grid;
+    gap: var(--space-sm);
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   &__control {
@@ -97,5 +128,11 @@
 
   &__error {
     color: var(--color-error);
+  }
+}
+
+@media (hover: hover) {
+  .skill-chip-group__custom:hover:not(:disabled) {
+    background: var(--color-primary-soft);
   }
 }

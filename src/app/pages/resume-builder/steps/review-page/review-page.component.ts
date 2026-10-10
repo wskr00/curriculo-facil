@@ -10,11 +10,10 @@ import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { ResumeDraftService } from '../../resume-draft.service';
 import { ResumePreviewComponent } from '../../resume-preview/resume-preview.component';
-import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-header.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ButtonComponent, ResumePreviewComponent, ResumeStepHeaderComponent, RouterLink],
+  imports: [ButtonComponent, ResumePreviewComponent, RouterLink],
   selector: 'app-review-page',
   styleUrl: './review-page.component.scss',
   templateUrl: './review-page.component.html',

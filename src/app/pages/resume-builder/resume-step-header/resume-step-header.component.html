@@ -1,12 +1,22 @@
 <header class="resume-step-header">
-  <p class="resume-step-header__brand">Currículo Fácil</p>
+  <div class="resume-step-header__context">
+    <div class="resume-step-header__back-slot">
+      @if (backLink(); as url) {
+        <a class="resume-step-header__back" [routerLink]="url">
+          <span aria-hidden="true">⤶</span>
+          Voltar
+        </a>
+      } @else {
+        <button class="resume-step-header__back" type="button" disabled>
+          <span aria-hidden="true">⤶</span>
+          Voltar
+        </button>
+      }
+    </div>
 
-  @if (backLink(); as url) {
-    <a class="resume-step-header__back" [routerLink]="url">
-      <span aria-hidden="true">←</span>
-      Voltar
-    </a>
-  }
+    <span class="resume-step-header__separator" aria-hidden="true">·</span>
+    <p class="resume-step-header__brand">Currículo Fácil</p>
+  </div>
 
   <app-progress-indicator [currentStep]="currentStep()" [totalSteps]="6" />
 </header>

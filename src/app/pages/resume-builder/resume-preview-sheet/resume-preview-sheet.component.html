@@ -1,0 +1,53 @@
+<div
+  class="resume-preview-sheet__backdrop"
+  [class.resume-preview-sheet__backdrop--visible]="expanded()"
+  aria-hidden="true"
+></div>
+
+<section
+  #sheet
+  class="resume-preview-sheet"
+  aria-labelledby="resume-preview-sheet-title"
+  (keydown)="onKeydown($event)"
+>
+  <header class="resume-preview-sheet__header">
+    <button
+      #handle
+      class="resume-preview-sheet__handle"
+      type="button"
+      aria-controls="resume-preview-sheet-content"
+      [attr.aria-expanded]="expanded()"
+      [attr.aria-label]="
+        expanded() ? 'Recolher prévia do currículo' : 'Expandir prévia do currículo'
+      "
+      (click)="toggleFromHandle($event)"
+    >
+      <span class="resume-preview-sheet__grip" aria-hidden="true"></span>
+    </button>
+
+    <div class="resume-preview-sheet__title-row">
+      <div class="resume-preview-sheet__heading">
+        <h2 id="resume-preview-sheet-title">Prévia do currículo</h2>
+      </div>
+
+      @if (expanded()) {
+        <app-button
+          class="resume-preview-sheet__close"
+          variant="tertiary"
+          type="button"
+          (click)="closePreview()"
+        >
+          Fechar prévia
+        </app-button>
+      }
+    </div>
+  </header>
+
+  <div
+    id="resume-preview-sheet-content"
+    class="resume-preview-sheet__content"
+    [attr.aria-hidden]="!expanded()"
+  >
+    <app-resume-preview [resume]="resume()" />
+  </div>
+</section>

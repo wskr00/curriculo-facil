@@ -2,22 +2,57 @@
   display: grid;
   gap: var(--space-md);
 
+  &__context {
+    align-items: center;
+    display: flex;
+    gap: var(--space-xs);
+  }
+
   &__brand {
+    align-items: center;
     color: var(--color-on-surface);
+    display: flex;
     font: var(--type-label-lg);
+    min-block-size: var(--touch-target-min);
+  }
+
+  &__back-slot {
+    align-items: center;
+    display: flex;
+    min-block-size: var(--touch-target-min);
+  }
+
+  &__separator {
+    align-items: center;
+    color: var(--color-text-muted);
+    display: flex;
+    font: var(--type-label-lg);
+    min-block-size: var(--touch-target-min);
   }
 
   &__back {
     align-items: center;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--color-primary);
+    cursor: pointer;
     display: inline-flex;
-    font: var(--type-label-md);
+    font: var(--type-label-lg);
     gap: var(--space-xs);
     inline-size: fit-content;
     min-block-size: var(--touch-target-min);
+    padding: 0;
+    text-align: start;
     text-decoration: none;
 
+    &:disabled {
+      color: var(--color-text-muted);
+      cursor: not-allowed;
+    }
+
     span {
-      font-size: 1.25em;
+      font-size: 1em;
       line-height: 1;
     }
   }

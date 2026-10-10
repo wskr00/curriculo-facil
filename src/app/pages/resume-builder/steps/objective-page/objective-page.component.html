@@ -1,6 +1,4 @@
 <div class="step-page">
-  <app-resume-step-header [currentStep]="2" backLink="/curriculo/novo/dados-pessoais" />
-
   <section class="step-page__intro" aria-labelledby="step-title">
     <h1 id="step-title">Que trabalho você procura?</h1>
     <p>Informe um cargo ou uma área que combine com você. Não precisa escrever formalmente.</p>
@@ -12,7 +10,6 @@
         controlId="professional-role"
         label="Cargo ou área"
         placeholder="Ex.: Atendente ou auxiliar administrativo"
-        hint="Você poderá mudar isso depois."
         autocomplete="organization-title"
         [formField]="draft.form.objective.role"
       />

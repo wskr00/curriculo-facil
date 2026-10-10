@@ -2,7 +2,7 @@
   <div class="text-field">
     <div class="text-field__label-row">
       <label [for]="controlId()">{{ label() }}</label>
-      @if (!required()) {
+      @if (showOptional() && !required()) {
         <span class="text-field__optional">opcional</span>
       }
     </div>
@@ -13,17 +13,18 @@
       [id]="controlId()"
       [type]="type()"
       [name]="name()"
-      [value]="value()"
+      [value]="displayValue()"
       [placeholder]="placeholder()"
       [required]="required()"
       [disabled]="disabled()"
       [readonly]="readonly()"
       [attr.autocomplete]="autocomplete() ?? null"
+      [attr.inputmode]="numericOnly() || type() === 'tel' ? 'numeric' : null"
       [attr.minlength]="minLength() ?? null"
       [attr.maxlength]="maxLength() ?? null"
       [attr.aria-invalid]="errorMessage() ? 'true' : null"
       [attr.aria-describedby]="describedBy()"
-      (input)="value.set(control.value)"
+      (input)="onInput($event, control)"
       (blur)="touch.emit()"
     />
 

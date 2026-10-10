@@ -1,12 +1,18 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ButtonComponent } from '../../../shared/ui/button/button.component';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { ResumeDraftService } from '../resume-draft.service';
 import { ResumePreviewComponent } from '../resume-preview/resume-preview.component';
+import { ResumePreviewSheetComponent } from '../resume-preview-sheet/resume-preview-sheet.component';
+import { ResumeStepHeaderComponent } from '../resume-step-header/resume-step-header.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ButtonComponent, ResumePreviewComponent, RouterOutlet],
+  imports: [
+    ResumePreviewComponent,
+    ResumePreviewSheetComponent,
+    ResumeStepHeaderComponent,
+    RouterOutlet,
+  ],
   providers: [ResumeDraftService],
   selector: 'app-resume-builder-layout',
   styleUrl: './resume-builder-layout.component.scss',
@@ -14,4 +20,15 @@ import { ResumePreviewComponent } from '../resume-preview/resume-preview.compone
 })
 export class ResumeBuilderLayoutComponent {
   protected readonly draft = inject(ResumeDraftService);
+  protected readonly currentStep = signal(1);
+  protected readonly backLink = signal<string | undefined>(undefined);
+
+  private readonly route = inject(ActivatedRoute);
+
+  protected updateStepNavigation(): void {
+    const { step, backLink } = this.route.firstChild?.snapshot.data ?? {};
+
+    this.currentStep.set(typeof step === 'number' ? step : 1);
+    this.backLink.set(typeof backLink === 'string' ? backLink : undefined);
+  }
 }

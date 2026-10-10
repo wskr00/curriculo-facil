@@ -5,17 +5,10 @@ import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { TextFieldComponent } from '../../../../shared/ui/text-field/text-field.component';
 import { TextareaComponent } from '../../../../shared/ui/textarea/textarea.component';
 import { ResumeDraftService } from '../../resume-draft.service';
-import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-header.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    ButtonComponent,
-    FormField,
-    ResumeStepHeaderComponent,
-    TextareaComponent,
-    TextFieldComponent,
-  ],
+  imports: [ButtonComponent, FormField, TextareaComponent, TextFieldComponent],
   selector: 'app-objective-page',
   styleUrl: './objective-page.component.scss',
   templateUrl: './objective-page.component.html',

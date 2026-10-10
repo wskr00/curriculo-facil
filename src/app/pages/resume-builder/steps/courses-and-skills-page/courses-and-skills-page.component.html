@@ -1,6 +1,4 @@
 <div class="step-page">
-  <app-resume-step-header [currentStep]="5" backLink="/curriculo/novo/formacao" />
-
   <section class="step-page__intro" aria-labelledby="step-title">
     <h1 id="step-title">O que você sabe fazer?</h1>
     <p>Adicione cursos se tiver e escolha habilidades que realmente combinam com você.</p>
@@ -10,7 +8,7 @@
     <div class="step-page__fields">
       <app-repeatable-section
         sectionId="course-list"
-        title="Cursos (opcional)"
+        title="Cursos"
         addLabel="Adicionar outro curso"
         (add)="draft.addCourse()"
       >
@@ -33,16 +31,8 @@
       <app-skill-chip-group
         controlId="skills"
         label="Habilidades"
-        hint="Selecione todas as que combinam com você."
         [options]="skillOptions"
         [formField]="draft.form.skills"
-      />
-
-      <app-text-field
-        controlId="other-skill"
-        label="Outra habilidade"
-        placeholder="Ex.: Informática básica"
-        [formField]="draft.form.otherSkill"
       />
     </div>
 

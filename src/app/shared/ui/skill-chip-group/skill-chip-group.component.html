@@ -34,6 +34,41 @@
             <span>{{ option.label }}</span>
           </label>
         }
+
+        @for (skill of customSkills(); track skill) {
+          <button
+            class="skill-chip-group__option skill-chip-group__custom"
+            type="button"
+            [disabled]="disabled()"
+            [attr.aria-label]="'Remover habilidade ' + skill"
+            (click)="removeCustomSkill(skill)"
+          >
+            <span>{{ skill }}</span>
+            <span class="skill-chip-group__remove-icon" aria-hidden="true">×</span>
+          </button>
+        }
+      </div>
+
+      <div class="skill-chip-group__custom-entry">
+        <app-text-field
+          [controlId]="customSkillId()"
+          label="Outra habilidade"
+          placeholder="Ex.: Informática básica"
+          [showOptional]="false"
+          [disabled]="disabled()"
+          [value]="pendingSkill()"
+          (valueChange)="onPendingSkillChange($event)"
+          (keydown.enter)="onCustomSkillKeydown($event)"
+        />
+
+        <app-button
+          type="button"
+          variant="secondary"
+          [disabled]="disabled() || !canAdd()"
+          (click)="addCustomSkill()"
+        >
+          Adicionar
+        </app-button>
       </div>
     </fieldset>
 
@@ -51,5 +86,9 @@
         {{ message }}
       </span>
     }
+
+    <span class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+      {{ statusMessage() }}
+    </span>
   </div>
 }

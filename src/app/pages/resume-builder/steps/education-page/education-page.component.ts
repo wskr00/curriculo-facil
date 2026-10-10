@@ -4,9 +4,18 @@ import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { RepeatableEntryComponent } from '../../../../shared/ui/repeatable-entry/repeatable-entry.component';
 import { RepeatableSectionComponent } from '../../../../shared/ui/repeatable-section/repeatable-section.component';
+import {
+  SelectFieldComponent,
+  type SelectOption,
+} from '../../../../shared/ui/select-field/select-field.component';
 import { TextFieldComponent } from '../../../../shared/ui/text-field/text-field.component';
 import { ResumeDraftService } from '../../resume-draft.service';
-import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-header.component';
+
+const EDUCATION_STATUS_OPTIONS: readonly SelectOption[] = [
+  { value: 'Concluído', label: 'Concluído' },
+  { value: 'Cursando', label: 'Cursando' },
+  { value: 'Interrompido', label: 'Interrompido' },
+];
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +24,7 @@ import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-
     FormField,
     RepeatableEntryComponent,
     RepeatableSectionComponent,
-    ResumeStepHeaderComponent,
+    SelectFieldComponent,
     TextFieldComponent,
   ],
   selector: 'app-education-page',
@@ -24,6 +33,7 @@ import { ResumeStepHeaderComponent } from '../../resume-step-header/resume-step-
 })
 export class EducationPageComponent {
   protected readonly draft = inject(ResumeDraftService);
+  protected readonly statusOptions = EDUCATION_STATUS_OPTIONS;
   private readonly router = inject(Router);
 
   protected onContinue(event: SubmitEvent): void {

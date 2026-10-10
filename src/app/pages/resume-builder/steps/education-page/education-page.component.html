@@ -1,6 +1,4 @@
 <div class="step-page">
-  <app-resume-step-header [currentStep]="4" backLink="/curriculo/novo/experiencias" />
-
   <section class="step-page__intro" aria-labelledby="step-title">
     <h1 id="step-title">Sua formação</h1>
     <p>Se ainda estiver estudando, tudo bem. Basta informar que está cursando.</p>
@@ -31,16 +29,17 @@
             placeholder="Ex.: Escola Nestor Nonato de Lima"
             [formField]="entry.institution"
           />
-          <app-text-field
+          <app-select-field
             [controlId]="'education-status-' + $index"
             label="Situação"
-            placeholder="Ex.: Cursando"
+            [options]="statusOptions"
             [formField]="entry.status"
           />
           <app-text-field
             [controlId]="'education-year-' + $index"
             label="Ano ou previsão"
             placeholder="Ex.: 2026"
+            [numericOnly]="true"
             [formField]="entry.year"
           />
         </app-repeatable-entry>
